@@ -1,0 +1,39 @@
+.block {
+  display: block;
+}
+
+.submit_btn {
+  display: block;
+  margin: auto;
+  margin-top: 1em;
+}
+
+.vote_form {
+  width: 300px;
+  margin: auto;
+  text-align: center;
+}
+
+.navbar-brand {
+  margin: auto!important;
+}
+
+.profile-img {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+}
+
+.profile-p {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.confirm-vote {
+  color: white;
+  background-color: yellowgreen;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: yellowgreen;
+  padding: 5px;
+}

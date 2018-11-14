@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<head>
+  <title>Email de confirmacion</title>
+</head>
+<div class="container shadow p-3 mb-5 bg-white rounded" style="text-align: center;margin-top: 1em;">
+  <h2>Tu votacion es la siguiente:</h2>
+  <h3>MMGVO del año:</h3>
+  <% if defined?(attachments) %>
+  <%= image_tag(attachments['mmgvo.png'].url, :style => "width: 100px;height: 100px;display: inline-block;") %><p class="profile-p"><%= @voter.mmgvo%></p>
+  <!-- <p><%= %></p> -->
+  <h3>Revelacion del año:</h3>
+  <%= image_tag(attachments['revelacion.png'].url, :style => "width: 100px;height: 100px;display: inline-block;") %><p class="profile-p"><%= @voter.revelacion%></p>
+  <!-- <p><%= %></p> -->
+  <h3>Infeliz del año:</h3>
+  <%= image_tag(attachments['infeliz.png'].url, :style => "width: 100px;height: 100px;display: inline-block;") %><p class="profile-p"><%= @voter.infeliz%></p>
+  <% else %>
+  <img style="width: 100px;height: 100px;display: inline-block;" src="/lib/imgs/profiles/yamil.png" alt=""><p class="profile-p">Yamil</p>
+  <h3>Revelacion del año:</h3>
+  <img style="width: 100px;height: 100px;display: inline-block;" src="/lib/imgs/profiles/katherine.png" alt=""><p class="profile-p">Katherine</p>
+  <!-- <p><%= %></p> -->
+  <h3>Infeliz del año:</h3>
+  <img style="width: 100px;height: 100px;display: inline-block;" src="/lib/imgs/profiles/ruben.png" alt=""><p class="profile-p">Ruben</p>
+  <% end %>
+  <br>
+  <h4>Click en este link para confirmar tu votacion:</h4>
+  <br>
+  <a class="confirm-vote" href="/confirm?token=ewrejgdfjjfjffjfjfjfjfjfjf">Confirma tu votacion</a>
+</div>

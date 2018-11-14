@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Team Hate MMGVO Awards</title>
+
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Team Hate MMGVO Awards 2018</a>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h1 class="mt-5">El sistema de votacion es simple:</h1>
+          <ul class="list-unstyled">
+            <li>1- Un voto por persona</li>
+            <li>2- No se puede cambiar la votacion una vez hecha</li>
+            <li>3- Se realizara una verificacion por persona</li>
+          </ul>
+        </div>
+      </div>
+      <%= form_tag("/vote", method: "post", class: "vote_form account shadow p-3 mb-5 bg-white rounded") do %>
+
+      <%= label_tag(:mmgvo, "Email", class: "block") %>
+      <%= email_field(:user, :email, required: true) %>
+      <br>
+      <%= label_tag(:q, "Votaciones") %>
+      <%= label_tag(:mmgvo, "MMGVO del año:", class: "block") %>
+      <%= select_tag(:mmgvo, options_for_select(@participantes), required: true) %>
+
+      <%= label_tag(:revelacion, "Revelacion del año:", class: "block") %>
+      <%= select_tag(:revelacion, options_for_select(@participantes), required: true) %>
+
+      <%= label_tag(:infeliz, "El Infeliz del año:", class: "block") %>
+      <%= select_tag(:infeliz, options_for_select(@participantes), required: true) %>
+
+      <%= submit_tag("Vote", class:"submit_btn", confirm: 'Segur@?')  %>
+      <% end %>
+    </div>
+
+  </body>
+
+</html>
