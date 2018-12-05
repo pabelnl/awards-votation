@@ -35,6 +35,7 @@ class HomeController < ApplicationController
   end
 
   def vote
+    
     voter = Voter.new
     error = []
     # Verify params and email format

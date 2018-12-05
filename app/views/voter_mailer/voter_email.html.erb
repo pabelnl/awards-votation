@@ -23,5 +23,5 @@
   <br>
   <h4>Click en este link para confirmar tu votacion:</h4>
   <br>
-  <a class="confirm-vote" href="/confirm?token=<%= @voter.confirmation_token%>">Confirma tu votacion</a>
+  <a class="confirm-vote" href="<%= @base_url%>/confirm?token=<%= @voter.confirmation_token%>">Confirma tu votacion</a>
 </div>
