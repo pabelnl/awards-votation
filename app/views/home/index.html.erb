@@ -33,20 +33,32 @@
         </div>
       </div>
       <%= form_tag("/vote", method: "post", class: "vote_form account shadow p-3 mb-5 bg-white rounded") do %>
+      <%= label_tag(:q, "Votaciones", class: "block") %>
+
+      <%= label_tag(:mmgvo, "MMGVO del año:", class: "inline-block") %>
+      <%= select_tag(:mmgvo, options_for_select(@participantes), required: true) %>
+      <%= image_tag( "/lib/imgs/profiles/profile.png", id: "mmgvo_image", height: '52', width: '52', class: "inline-block profile-vote") %>
+
+      <%= label_tag(:revelacion, "Revelacion del año:", class: "inline-block") %>
+      <%= select_tag(:revelacion, options_for_select(@participantes), required: true) %>
+      <%= image_tag( "/lib/imgs/profiles/profile.png", id: "revelacion_image", height: '52', width: '52', class: "inline-block profile-vote") %>
+
+      <%= label_tag(:infeliz, "El Infeliz del año:", class: "inline-block") %>
+      <%= select_tag(:infeliz, options_for_select(@participantes), required: true) %>
+      <%= image_tag( "/lib/imgs/profiles/profile.png", id: "infeliz_image", height: '52', width: '52', class: "inline-block profile-vote") %>
+
+      <%= label_tag(:jugador, "Jugador mas odiado en WW:", class: "inline-block") %>
+      <%= select_tag(:jugador, options_for_select(@participantes), required: true) %>
+      <%= image_tag( "/lib/imgs/profiles/profile.png", id: "jugador_image", height: '52', width: '52', class: "inline-block profile-vote") %>
+
+      <%= label_tag(:nunca, "El que nunca puede:", class: "inline-block") %>
+      <%= select_tag(:nunca, options_for_select(@participantes), required: true) %>
+      <%= image_tag( "/lib/imgs/profiles/profile.png", id: "nunca_image", height: '52', width: '52', class: "inline-block profile-vote") %>
 
       <%= label_tag(:mmgvo, "Email", class: "block") %>
-      <%= email_field(:user, :email, required: true) %>
+      <%= email_field(:user, :email, required: true, class: "email-form", placeholder: "Tu email aqui manin") %>
       <br>
-      <%= label_tag(:q, "Votaciones") %>
-      <%= label_tag(:mmgvo, "MMGVO del año:", class: "block") %>
-      <%= select_tag(:mmgvo, options_for_select(@participantes), required: true) %>
-
-      <%= label_tag(:revelacion, "Revelacion del año:", class: "block") %>
-      <%= select_tag(:revelacion, options_for_select(@participantes), required: true) %>
-
-      <%= label_tag(:infeliz, "El Infeliz del año:", class: "block") %>
-      <%= select_tag(:infeliz, options_for_select(@participantes), required: true) %>
-
+      
       <%= submit_tag("Vote", class:"submit_btn", confirm: 'Segur@?')  %>
       <% end %>
     </div>

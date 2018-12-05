@@ -6,10 +6,16 @@
   display: block;
   margin: auto;
   margin-top: 1em;
+  width: 80%;
+  height: 50px;
+  border-style: double;
+  border-color: yellowgreen;
+  border-width: 2px;
+  border-radius: 30px;
 }
 
 .vote_form {
-  width: 300px;
+  width: 410px;
   margin: auto;
   text-align: center;
 }
@@ -36,4 +42,14 @@
   border-radius: 5px;
   border-color: yellowgreen;
   padding: 5px;
+}
+.profile-vote {
+  margin-top: -5px;
+}
+label {
+  margin-bottom: 1.8rem;
+}
+.email-form{
+  width: 80%;
+  margin-bottom: 2em;
 }

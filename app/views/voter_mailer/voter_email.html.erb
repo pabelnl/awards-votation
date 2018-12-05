@@ -11,18 +11,17 @@
   <h3>Revelacion del año:</h3>
   <%= image_tag(attachments['revelacion.png'].url, :style => "width: 100px;height: 100px;display: inline-block;") %><p class="profile-p"><%= @voter.revelacion%></p>
   <!-- <p><%= %></p> -->
-  <h3>Infeliz del año:</h3>
+  <h3>El Infeliz del año:</h3>
   <%= image_tag(attachments['infeliz.png'].url, :style => "width: 100px;height: 100px;display: inline-block;") %><p class="profile-p"><%= @voter.infeliz%></p>
-  <% else %>
-  <img style="width: 100px;height: 100px;display: inline-block;" src="/lib/imgs/profiles/yamil.png" alt=""><p class="profile-p">Yamil</p>
-  <h3>Revelacion del año:</h3>
-  <img style="width: 100px;height: 100px;display: inline-block;" src="/lib/imgs/profiles/katherine.png" alt=""><p class="profile-p">Katherine</p>
   <!-- <p><%= %></p> -->
-  <h3>Infeliz del año:</h3>
-  <img style="width: 100px;height: 100px;display: inline-block;" src="/lib/imgs/profiles/ruben.png" alt=""><p class="profile-p">Ruben</p>
+  <h3>Jugador mas odiado en WW:</h3>
+  <%= image_tag(attachments['jugador.png'].url, :style => "width: 100px;height: 100px;display: inline-block;") %><p class="profile-p"><%= @voter.jugador%></p>
+  <!-- <p><%= %></p> -->
+  <h3>El que nunca puede:</h3>
+  <%= image_tag(attachments['nunca.png'].url, :style => "width: 100px;height: 100px;display: inline-block;") %><p class="profile-p"><%= @voter.nunca%></p>
   <% end %>
   <br>
   <h4>Click en este link para confirmar tu votacion:</h4>
   <br>
-  <a class="confirm-vote" href="/confirm?token=ewrejgdfjjfjffjfjfjfjfjfjf">Confirma tu votacion</a>
+  <a class="confirm-vote" href="/confirm?token=<%= @voter.confirmation_token%>">Confirma tu votacion</a>
 </div>

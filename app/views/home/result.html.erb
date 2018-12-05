@@ -19,14 +19,43 @@
       <a class="navbar-brand" href="#">Team Hate MMGVO Awards 2018</a>
     </div>
   </nav>
-  <div class="container">
-    <h1>MMGVO del año:</h1>
-    <h2><%= @mmgvoWinner.first["mmgvo"] %></h2>
-    <h1>Revelacion del año:</h1>
-    <h2><%= @revelacionesWinner.first["revelacion"] %></h2>
-    <h1>Infeliz del año:</h1>
-    <h2><%= @infelicesWinner.first["infeliz"] %></h2>
-    <table width="80%">
+  <div class="container" style="text-align:center;">
+    <% if not @mmgvoWinner.first.nil? %>
+    <h1 class="label label-primary" ><span class="badge badge-light">MMGVO del año:</span></h1>
+    <span class="badge badge-primary"><%= @mmgvoWinner.first["mmgvo"] %><span class="badge badge-light" style="margin-left: 5px;"><%= @mmgvoWinnerCount%></span></span>
+    <% else %>
+    <h1 class="label label-primary" ><span class="badge badge-light">MMGVO del año: NA</span></h1>
+    <% end %>
+
+    <% if not @revelacionesWinner.first.nil? %>
+    <h1 class="label label-primary" ><span class="badge badge-light">Revelacion del año:</span></h1>
+    <span class="badge badge-info"><%= @revelacionesWinner.first["revelacion"] %><span class="badge badge-light" style="margin-left: 5px;"><%= @revelacionesWinnerCount%></span></span>
+    <% else %>
+    <h1 class="label label-primary" ><span class="badge badge-light">Revelacion del año: NA</span></h1>
+    <% end %>
+
+    <% if not @infelicesWinner.first.nil? %>
+    <h1 class="label label-primary" ><span class="badge badge-light">El Infeliz del año:</span></h1>
+    <span class="badge badge-dark"><%= @infelicesWinner.first["infeliz"] %><span class="badge badge-light" style="margin-left: 5px;"><%= @infelicesWinnerCount%></span></span>
+    <% else %>
+    <h1 class="label label-primary" ><span class="badge badge-light">El Infeliz del año: NA</span></h1>
+    <% end %>
+
+    <% if not @jugadorWinner.first.nil? %>
+    <h1 class="label label-primary" ><span class="badge badge-light">Jugador mas odiado en WW:</span></h1>
+    <span class="badge badge-dark"><%= @jugadorWinner.first["jugador"] %><span class="badge badge-light" style="margin-left: 5px;"><%= @jugadorWinnerCount%></span></span>
+    <% else %>
+    <h1 class="label label-primary" ><span class="badge badge-light">Jugador mas odiado en WW: NA</span></h1>
+    <% end %>
+
+    <% if not @nuncaWinner.first.nil? %>
+    <h1 class="label label-primary" ><span class="badge badge-light">El que nunca puede:</span></h1>
+    <span class="badge badge-dark"><%= @nuncaWinner.first["nunca"] %><span class="badge badge-light" style="margin-left: 5px;"><%= @nuncaWinnerCount%></span></span>
+    <% else %>
+    <h1 class="label label-primary" ><span class="badge badge-light">El que nunca puede: NA</span></h1>
+    <% end %>
+
+    <table class="table table-striped" width="80%">
       <% @votes.each do |vote| %>
       <tr>
         <td><%= vote.email %></td>

@@ -13,6 +13,12 @@ class VoterMailer < ApplicationMailer
       if @voter.infeliz.present?
         attachments.inline["infeliz.png"] = File.read("#{Rails.root}/public/lib/imgs/profiles/"+@voter.infeliz.downcase+".png")
       end
+      if @voter.jugador.present?
+        attachments.inline["jugador.png"] = File.read("#{Rails.root}/public/lib/imgs/profiles/"+@voter.jugador.downcase+".png")
+      end
+      if @voter.nunca.present?
+        attachments.inline["nunca.png"] = File.read("#{Rails.root}/public/lib/imgs/profiles/"+@voter.nunca.downcase+".png")
+      end
       mail(to: @voter.email, subject: 'MMGVO Awards 2018 vote confirmation')
   end
 

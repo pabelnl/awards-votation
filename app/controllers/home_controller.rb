@@ -1,30 +1,37 @@
 class HomeController < ApplicationController
+
   require 'securerandom'
   require 'base64'
 
   def index
     # Lista de participantes
     @participantes = [
-      "Yamil",
-      "Yael",
-      "Jatna",
-      "Gabriela",
-      "Pabel",
-      "Luis",
-      "Pathy",
-      "Mitchel",
+      "Angely",
+      "Audry",
+      "Carlos",
+      "Daniela",
       "Faniela",
+      "Gabriela",
+      "Harold",
+      "Jatna",
+      "Jhomar",
+      "Katherine",
+      "Luis",
+      "Manuel",
+      "Marcos",
+      "Max",
+      "Mitchel",
+      "Nelson",
+      "Nicole",
+      "Pabel",
+      "Pathy",
+      "Pino",
       "Roosvelt",
       "Ruben",
-      "Manuel",
-      "Pino",
-      "Harold",
-      "Katherine",
-      "Carlos",
-      "Anyely",
-      "Nicole",
-      "Nelson"
+      "Yael",
+      "Yamil"
     ]
+
   end
 
   def vote
@@ -62,6 +69,17 @@ class HomeController < ApplicationController
       error.push("No se pudo encontrar el candidato para infeliz en los parametros del formulario.")
     end
 
+    if vote_params[:jugador].present?
+      voter.jugador = vote_params[:jugador]
+    else
+      error.push("No se pudo encontrar el candidato para jugador mas odiado en los parametros del formulario.")
+    end
+
+    if vote_params[:nunca].present?
+      voter.nunca = vote_params[:nunca]
+    else
+      error.push("No se pudo encontrar el candidato para el que nunca puede en los parametros del formulario.")
+    end
 
     if error.count > 0
       @error = error
@@ -80,35 +98,69 @@ class HomeController < ApplicationController
   end
 
   def confirm
-    return render :template => "voter_mailer/voter_email"
-    # error = []
-    # if params[:token].present?
-    #   if voter = Voter.where(confirmation_token: params[:token]).take
-    #     if voter.confirmed is true
-    #       error.push("Esta votacion ya fue confirmada.")
-    #     else
-    #       voter.confirmed = true
-    #       voter.save
-    #     end
-    #   else
-    #     error.push("No existe ninguna votacion con ese token de confirmacion.")
-    #   end
-    # else
-    #   error.push("No existe el token de confirmacion en el url.")
-    # end
-    #
-    # if error.count > 0
-    #   render :template => "home/error", :locals => {:error => error}
-    # end
+    # return render :template => "voter_mailer/voter_email"
+    error = []
+    if params[:token].present?
+      if voter = Voter.where(confirmation_token: params[:token]).take
+        if voter.confirmed == true
+          error.push("Esta votacion ya fue confirmada.")
+        else
+          voter.confirmed = true
+          voter.save
+        end
+      else
+        error.push("No existe ninguna votacion con ese token de confirmacion.")
+      end
+    else
+      error.push("No existe el token de confirmacion en el url.")
+    end
+
+    if error.count > 0
+      @error = error
+      render :template => "home/error", :locals => {:error => error}
+    end
 
   end
 
   def result
-    @mmgvoWinner = Voter.select([:mmgvo, Voter.arel_table[:mmgvo].count]).to_a
-    @revelacionesWinner = Voter.select([:revelacion, Voter.arel_table[:revelacion].count]).to_a
-    @infelicesWinner = Voter.select([:infeliz, Voter.arel_table[:infeliz].count]).to_a
+    @error = []
+    if params[:active].present?
+      if params[:active] = "ok"
+        @mmgvoWinner = Voter.select([:mmgvo, Arel.star.count]).having(Arel.star.count.gt(1)).group(:mmgvo)
+        if not @mmgvoWinner.first.nil?
+          @mmgvoWinnerCount = Voter.select(Arel.star.count).where(Voter.arel_table[:mmgvo].eq(@mmgvoWinner.first["mmgvo"])).size
+        end
 
-    @votes = Voter.where(confirmed: true)
+        @revelacionesWinner = Voter.select([:revelacion, Arel.star.count]).having(Arel.star.count.gt(1)).group(:revelacion)
+        if not @revelacionesWinner.first.nil?
+          @revelacionesWinnerCount = Voter.select(Arel.star.count).where(Voter.arel_table[:revelacion].eq(@revelacionesWinner.first["revelacion"])).size
+        end
+
+        @infelicesWinner = Voter.select([:infeliz, Arel.star.count]).having(Arel.star.count.gt(1)).group(:infeliz)
+        if not @infelicesWinner.first.nil?
+          @infelicesWinnerCount = Voter.select(Arel.star.count).where(Voter.arel_table[:infeliz].eq(@infelicesWinner.first["infeliz"])).size
+        end
+
+        @jugadorWinner = Voter.select([:jugador, Arel.star.count]).having(Arel.star.count.gt(1)).group(:infeliz)
+        if not @jugadorWinner.first.nil?
+          @jugadorWinnerCount = Voter.select(Arel.star.count).where(Voter.arel_table[:jugador].eq(@jugadorWinner.first["jugador"])).size
+        end
+
+        @nuncaWinner = Voter.select([:nunca, Arel.star.count]).having(Arel.star.count.gt(1)).group(:nunca)
+        if not @nuncaWinner.first.nil?
+          @nuncaWinnerCount = Voter.select(Arel.star.count).where(Voter.arel_table[:nunca].eq(@nuncaWinner.first["nunca"])).size
+        end
+
+        @votes = Voter.where(confirmed: true)
+      else
+        @error.push("No estas autorizado.")
+        render :template => "home/error", :locals => {:error => @error}
+      end
+    else
+      @error.push("No estas autorizado.")
+      render :template => "home/error", :locals => {:error => @error}
+    end
+
   end
 
   private

@@ -22,8 +22,10 @@
     <div class="container" style="text-align: center;">
       <h1 style="color: tomato;">ERROR!</h1>
       <ul style="list-style-type:none">
-      <% @error.each do |msg|%>
-        <li><%= msg.to_s %></li>
+      <% if @error.count > 0 %>
+        <% @error.each do |msg|%>
+          <li><%= msg.to_s %></li>
+        <% end %>
       <% end %>
       </ul>
       <img src="lib/imgs/broken-banana.jpg" alt="">

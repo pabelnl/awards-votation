@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_12_143403) do
+ActiveRecord::Schema.define(version: 2018_12_03_211412) do
 
   create_table "voters", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2018_11_12_143403) do
     t.string "infeliz"
     t.string "confirmation_token"
     t.boolean "confirmed"
+    t.string "jugador"
+    t.string "nunca"
   end
 
 end
