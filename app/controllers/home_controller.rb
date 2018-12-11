@@ -128,30 +128,40 @@ class HomeController < ApplicationController
     @error = []
     if params[:active].present?
       if params[:active] = "ok"
-
-        @mmgvoWinner = Voter.select("COUNT(mmgvo) as total, mmgvo").where(:confirmed => true).group(:mmgvo).having("COUNT(mmgvo) > 1").order(:mmgvo).map{|p| {p.mmgvo => p.total} }
-        if not @mmgvoWinner.first.nil?
-          @mmgvoWinnerCount = @mmgvoWinner.first.first.second
+        # Query for the mmgvo winner
+        @mmgvoWinner = []
+        queryMmgvo = Voter.select("COUNT(mmgvo) as total, mmgvo").where(:confirmed => true).group(:mmgvo).having("COUNT(mmgvo) > 1").order(:mmgvo).map{|p| {:mmgvo => p.mmgvo, :total => p.total} }
+        if not queryMmgvo.nil?
+          @mmgvoWinner = queryMmgvo.group_by { |x| x[:total] }.max.last
+          @mmgvoWinnerCount = @mmgvoWinner.first[:total]
         end
-
-        @revelacionesWinner = Voter.select("COUNT(revelacion) as total, revelacion").where(:confirmed => true).group(:revelacion).having("COUNT(revelacion) > 1").order(:revelacion).reverse_order.map{|p| {p.revelacion => p.total} }
-        if not @revelacionesWinner.first.nil?
-          @revelacionesWinnerCount = @revelacionesWinner.first.first.second
+        # Query for the revelacion winner
+        @revelacionesWinner = []
+        queryRevelacion = Voter.select("COUNT(revelacion) as total, revelacion").where(:confirmed => true).group(:revelacion).having("COUNT(revelacion) > 1").order(:revelacion).reverse_order.map{|p| {:revelacion => p.revelacion, :total => p.total} }
+        if not queryRevelacion.nil?
+          @revelacionesWinner = queryRevelacion.group_by { |x| x[:total] }.max.last
+          @revelacionesWinnerCount = @revelacionesWinner.first[:total]
         end
-
-        @infelicesWinner = Voter.select("COUNT(infeliz) as total, infeliz").where(:confirmed => true).group(:infeliz).having("COUNT(infeliz) > 1").order(:infeliz).map{|p| {p.infeliz => p.total} }
-        if not @infelicesWinner.first.nil?
-          @infelicesWinnerCount = @infelicesWinner.first.first.second
+        # Query for the infeliz winner
+        @infelicesWinner = []
+        queryInfeliz = Voter.select("COUNT(infeliz) as total, infeliz").where(:confirmed => true).group(:infeliz).having("COUNT(infeliz) > 1").order(:infeliz).map{|p| {:infeliz => p.infeliz, :total => p.total} }
+        if not queryInfeliz.nil?
+          @infelicesWinner = queryInfeliz.group_by { |x| x[:total] }.max.last
+          @infelicesWinnerCount = @infelicesWinner.first[:total]
         end
-
-        @jugadorWinner = Voter.select("COUNT(jugador) as total, jugador").where(:confirmed => true).group(:jugador).having("COUNT(jugador) > 1").order(:jugador).map{|p| {p.jugador => p.total} }
-        if not @jugadorWinner.first.nil?
-          @jugadorWinnerCount = @jugadorWinner.first.first.second
+        # Query for the jugador winner
+        @jugadorWinner = []
+        queryJugador = Voter.select("COUNT(jugador) as total, jugador").where(:confirmed => true).group(:jugador).having("COUNT(jugador) > 1").order(:jugador).map{|p| {:jugador => p.jugador, :total => p.total} }
+        if not queryJugador.nil?
+          @jugadorWinner = queryJugador.group_by { |x| x[:total] }.max.last
+          @jugadorWinnerCount = @jugadorWinner.first[:total]
         end
-
-        @nuncaWinner = Voter.select("COUNT(nunca) as total, nunca").where(:confirmed => true).group(:nunca).having("COUNT(nunca) > 1").order(:nunca).map{|p| {p.nunca => p.total} }
-        if not @nuncaWinner.first.nil?
-          @nuncaWinnerCount = @nuncaWinner.first.first.second
+        # Query for the nunca puede winner
+        @nuncaWinner = []
+        queryNunca = Voter.select("COUNT(nunca) as total, nunca").where(:confirmed => true).group(:nunca).having("COUNT(nunca) > 1").order(:nunca).map{|p| {:nunca => p.nunca, :total => p.total} }
+        if not queryNunca.nil?
+          @nuncaWinner = queryNunca.group_by { |x| x[:total] }.max.last
+          @nuncaWinnerCount = @nuncaWinner.first[:total]
         end
 
         @votes = Voter.where(confirmed: true)
