@@ -5,8 +5,11 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta property="og:title" content="Team Hate MMGVO Awards" />
+    <meta property="og:description" content="Una pagina sencilla para que los haters puedan votar.">
+
+    <meta name="description" content="Una pagina sencilla para que los haters puedan votar.">
+    <meta name="author" content="Pabel Nunez L.">
 
     <title>Team Hate MMGVO Awards</title>
 
@@ -58,7 +61,7 @@
       <%= label_tag(:mmgvo, "Email", class: "block") %>
       <%= email_field(:user, :email, required: true, class: "email-form", placeholder: "Tu email aqui manin") %>
       <br>
-      
+
       <%= submit_tag("Vote", class:"submit_btn", confirm: 'Segur@?')  %>
       <% end %>
     </div>
