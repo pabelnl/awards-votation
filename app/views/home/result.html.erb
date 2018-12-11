@@ -22,35 +22,35 @@
   <div class="container" style="text-align:center;">
     <% if not @mmgvoWinner.first.nil? %>
     <h1 class="label label-primary" ><span class="badge badge-light">MMGVO del año:</span></h1>
-    <span class="badge badge-primary"><%= @mmgvoWinner %><span class="badge badge-light" style="margin-left: 5px;"><%= @mmgvoWinnerCount%></span></span>
+    <span class="badge badge-primary"><%= @mmgvoWinner.first.first.first %><span class="badge badge-light" style="margin-left: 5px;"><%= @mmgvoWinnerCount%></span></span>
     <% else %>
     <h1 class="label label-primary" ><span class="badge badge-light">MMGVO del año: NA</span></h1>
     <% end %>
 
     <% if not @revelacionesWinner.first.nil? %>
     <h1 class="label label-primary" ><span class="badge badge-light">Revelacion del año:</span></h1>
-    <span class="badge badge-info"><%= @revelacionesWinner %><span class="badge badge-light" style="margin-left: 5px;"><%= @revelacionesWinnerCount%></span></span>
+    <span class="badge badge-info"><%= @revelacionesWinner.first.first.first %><span class="badge badge-light" style="margin-left: 5px;"><%= @revelacionesWinnerCount%></span></span>
     <% else %>
     <h1 class="label label-primary" ><span class="badge badge-light">Revelacion del año: NA</span></h1>
     <% end %>
 
     <% if not @infelicesWinner.first.nil? %>
     <h1 class="label label-primary" ><span class="badge badge-light">El Infeliz del año:</span></h1>
-    <span class="badge badge-dark"><%= @infelicesWinner %><span class="badge badge-light" style="margin-left: 5px;"><%= @infelicesWinnerCount%></span></span>
+    <span class="badge badge-dark"><%= @infelicesWinner.first.first.first %><span class="badge badge-light" style="margin-left: 5px;"><%= @infelicesWinnerCount%></span></span>
     <% else %>
     <h1 class="label label-primary" ><span class="badge badge-light">El Infeliz del año: NA</span></h1>
     <% end %>
 
     <% if not @jugadorWinner.first.nil? %>
     <h1 class="label label-primary" ><span class="badge badge-light">Jugador mas odiado en WW:</span></h1>
-    <span class="badge badge-dark"><%= @jugadorWinner %><span class="badge badge-light" style="margin-left: 5px;"><%= @jugadorWinnerCount%></span></span>
+    <span class="badge badge-dark"><%= @jugadorWinner.first.first.first %><span class="badge badge-light" style="margin-left: 5px;"><%= @jugadorWinnerCount%></span></span>
     <% else %>
     <h1 class="label label-primary" ><span class="badge badge-light">Jugador mas odiado en WW: NA</span></h1>
     <% end %>
 
     <% if not @nuncaWinner.first.nil? %>
     <h1 class="label label-primary" ><span class="badge badge-light">El que nunca puede:</span></h1>
-    <span class="badge badge-dark"><%= @nuncaWinner %><span class="badge badge-light" style="margin-left: 5px;"><%= @nuncaWinnerCount%></span></span>
+    <span class="badge badge-dark"><%= @nuncaWinner.first.first.first %><span class="badge badge-light" style="margin-left: 5px;"><%= @nuncaWinnerCount%></span></span>
     <% else %>
     <h1 class="label label-primary" ><span class="badge badge-light">El que nunca puede: NA</span></h1>
     <% end %>
