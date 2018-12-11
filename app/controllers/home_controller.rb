@@ -12,6 +12,7 @@ class HomeController < ApplicationController
       "Daniela",
       "Faniela",
       "Gabriela",
+      "Gladys",
       "Harold",
       "Jatna",
       "Jhomar",
@@ -26,8 +27,8 @@ class HomeController < ApplicationController
       "Pabel",
       "Pathy",
       "Pino",
+      "Plinio",
       "Roosvelt",
-      "Ruben",
       "Yael",
       "Yamil"
     ]
@@ -35,7 +36,7 @@ class HomeController < ApplicationController
   end
 
   def vote
-    
+
     voter = Voter.new
     error = []
     # Verify params and email format
