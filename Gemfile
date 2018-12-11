@@ -53,7 +53,7 @@ end
 
 group :production do
   # DB Management
-  gem 'pg'
+  gem 'pg', '>= 1.1.3'
 end
 
 group :test do
