@@ -128,29 +128,29 @@ class HomeController < ApplicationController
     @error = []
     if params[:active].present?
       if params[:active] = "ok"
-        @mmgvoWinner = Voter.select([:mmgvo, Voter.arel_table[:mmgvo].count]).order(:mmgvo).reverse_order.group(:mmgvo).limit(1)
+        @mmgvoWinner = Voter.select("COUNT(mmgvo) as total, mmgvo").group(:mmgvo).having("COUNT(mmgvo) > 1").order(:mmgvo).map{|p| {p.mmgvo => p.total} }
         if not @mmgvoWinner.first.nil?
-          @mmgvoWinnerCount = Voter.select(:mmgvo).where(Voter.arel_table[:mmgvo].eq(@mmgvoWinner.first[:mmgvo])).order(:created_at).size
+          @mmgvoWinnerCount = @mmgvoWinner.first.first.second ?? "0"
         end
 
-        @revelacionesWinner = Voter.select([:revelacion, Voter.arel_table[:revelacion].count]).order(:revelacion).reverse_order.group(:revelacion).limit(1)
+        @revelacionesWinner = Voter.select("COUNT(revelacion) as total, revelacion").group(:revelacion).having("COUNT(revelacion) > 1").order(:revelacion).map{|p| {p.revelacion => p.total} }
         if not @revelacionesWinner.first.nil?
-          @revelacionesWinnerCount = Voter.select(:revelacion).where(Voter.arel_table[:revelacion].eq(@revelacionesWinner.first[:revelacion])).order(:created_at).size
+          @revelacionesWinnerCount = @revelacionesWinner.first.first.second ?? "0"
         end
 
-        @infelicesWinner = Voter.select([:infeliz, Voter.arel_table[:infeliz].count]).order(:infeliz).reverse_order.group(:infeliz).limit(1)
+        @infelicesWinner = Voter.select("COUNT(infeliz) as total, infeliz").group(:infeliz).having("COUNT(infeliz) > 1").order(:infeliz).map{|p| {p.infeliz => p.total} }
         if not @infelicesWinner.first.nil?
-          @infelicesWinnerCount = Voter.select(:infeliz).where(Voter.arel_table[:infeliz].eq(@infelicesWinner.first[:infeliz])).order(:created_at).size
+          @infelicesWinnerCount = @infelicesWinner.first.first.second ?? "0"
         end
 
-        @jugadorWinner = Voter.select([:jugador, Voter.arel_table[:jugador].count]).order(:jugador).reverse_order.group(:jugador).limit(1)
+        @jugadorWinner = Voter.select("COUNT(jugador) as total, jugador").group(:jugador).having("COUNT(jugador) > 1").order(:jugador).map{|p| {p.jugador => p.total} }
         if not @jugadorWinner.first.nil?
-          @jugadorWinnerCount = Voter.select(:jugador).where(Voter.arel_table[:jugador].eq(@jugadorWinner.first[:jugador])).order(:created_at).size
+          @jugadorWinnerCount = @jugadorWinner.first.first.second ?? "0"
         end
 
-        @nuncaWinner = Voter.select([:nunca, Voter.arel_table[:nunca].count]).order(:nunca).reverse_order.group(:nunca).limit(1)
+        @nuncaWinner = Voter.select("COUNT(nunca) as total, nunca").group(:nunca).having("COUNT(nunca) > 1").order(:nunca).map{|p| {p.nunca => p.total} }
         if not @nuncaWinner.first.nil?
-          @nuncaWinnerCount = Voter.select(:nunca).where(Voter.arel_table[:nunca].eq(@nuncaWinner.first[:nunca])).order(:created_at).size
+          @nuncaWinnerCount = @nuncaWinner.first.first.second ?? "0"
         end
 
         @votes = Voter.where(confirmed: true)
