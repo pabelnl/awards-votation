@@ -3,8 +3,8 @@ class VoterMailer < ApplicationMailer
 
   def voter_email(voter)
       @voter = voter
-      @base_url = request.base_url
-      
+      @base_url = ENV['HEROKU_URL']
+
       if @voter.mmgvo.present?
         attachments.inline["mmgvo.png"] = File.read("#{Rails.root}/public/lib/imgs/profiles/"+@voter.mmgvo.downcase+".png")
       end
