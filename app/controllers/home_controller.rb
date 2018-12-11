@@ -19,7 +19,7 @@ class HomeController < ApplicationController
       "Katherine",
       "Luis",
       "Manuel",
-      "Marcos",
+      "Marco",
       "Max",
       "Mitchel",
       "Nelson",
@@ -128,29 +128,29 @@ class HomeController < ApplicationController
     @error = []
     if params[:active].present?
       if params[:active] = "ok"
-        @mmgvoWinner = Voter.select([:mmgvo, Arel.star.count]).having(Arel.star.count.gt(1)).group(:mmgvo)
+        @mmgvoWinner = Voter.select([:mmgvo, Voter.arel_table[:mmgvo].count]).order(:mmgvo).reverse_order.group(:mmgvo).limit(1)
         if not @mmgvoWinner.first.nil?
-          @mmgvoWinnerCount = Voter.select(Arel.star.count).where(Voter.arel_table[:mmgvo].eq(@mmgvoWinner.first["mmgvo"])).size
+          @mmgvoWinnerCount = Voter.select(:mmgvo).where(Voter.arel_table[:mmgvo].eq(@mmgvoWinner.first[:mmgvo])).order(:created_at).size
         end
 
-        @revelacionesWinner = Voter.select([:revelacion, Arel.star.count]).having(Arel.star.count.gt(1)).group(:revelacion)
+        @revelacionesWinner = Voter.select([:revelacion, Voter.arel_table[:revelacion].count]).order(:revelacion).reverse_order.group(:revelacion).limit(1)
         if not @revelacionesWinner.first.nil?
-          @revelacionesWinnerCount = Voter.select(Arel.star.count).where(Voter.arel_table[:revelacion].eq(@revelacionesWinner.first["revelacion"])).size
+          @revelacionesWinnerCount = Voter.select(:revelacion).where(Voter.arel_table[:revelacion].eq(@revelacionesWinner.first[:revelacion])).order(:created_at).size
         end
 
-        @infelicesWinner = Voter.select([:infeliz, Arel.star.count]).having(Arel.star.count.gt(1)).group(:infeliz)
+        @infelicesWinner = Voter.select([:infeliz, Voter.arel_table[:infeliz].count]).order(:infeliz).reverse_order.group(:infeliz).limit(1)
         if not @infelicesWinner.first.nil?
-          @infelicesWinnerCount = Voter.select(Arel.star.count).where(Voter.arel_table[:infeliz].eq(@infelicesWinner.first["infeliz"])).size
+          @infelicesWinnerCount = Voter.select(:infeliz).where(Voter.arel_table[:infeliz].eq(@infelicesWinner.first[:infeliz])).order(:created_at).size
         end
 
-        @jugadorWinner = Voter.select([:jugador, Arel.star.count]).having(Arel.star.count.gt(1)).group(:infeliz)
+        @jugadorWinner = Voter.select([:jugador, Voter.arel_table[:jugador].count]).order(:jugador).reverse_order.group(:jugador).limit(1)
         if not @jugadorWinner.first.nil?
-          @jugadorWinnerCount = Voter.select(Arel.star.count).where(Voter.arel_table[:jugador].eq(@jugadorWinner.first["jugador"])).size
+          @jugadorWinnerCount = Voter.select(:jugador).where(Voter.arel_table[:jugador].eq(@jugadorWinner.first[:jugador])).order(:created_at).size
         end
 
-        @nuncaWinner = Voter.select([:nunca, Arel.star.count]).having(Arel.star.count.gt(1)).group(:nunca)
+        @nuncaWinner = Voter.select([:nunca, Voter.arel_table[:nunca].count]).order(:nunca).reverse_order.group(:nunca).limit(1)
         if not @nuncaWinner.first.nil?
-          @nuncaWinnerCount = Voter.select(Arel.star.count).where(Voter.arel_table[:nunca].eq(@nuncaWinner.first["nunca"])).size
+          @nuncaWinnerCount = Voter.select(:nunca).where(Voter.arel_table[:nunca].eq(@nuncaWinner.first[:nunca])).order(:created_at).size
         end
 
         @votes = Voter.where(confirmed: true)
