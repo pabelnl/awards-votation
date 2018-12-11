@@ -56,7 +56,37 @@
     <% end %>
 
     <table class="table table-striped" width="80%">
+      <tr>
+        <th>Email</th>
+        <th>MMVO</th>
+        <th>REVELACION</th>
+        <th>INFELIZ</th>
+        <th>JUGADOR MAS ODIADO</th>
+        <th>NUNCA PUEDE</th>
+      </tr>
       <% @votes.each do |vote| %>
+      <tr>
+        <td><%= vote.email %></td>
+        <td><%= vote.mmgvo %></td>
+        <td><%= vote.revelacion %></td>
+        <td><%= vote.infeliz %></td>
+        <td><%= vote.jugador %></td>
+        <td><%= vote.nunca %></td>
+      </tr>
+      <% end %>
+    </table>
+    <br>
+    <h2>VOTOS SIN CONFIRMAR</h2>
+    <table class="table table-striped" width="80%">
+      <tr>
+        <th>Email</th>
+        <th>MMVO</th>
+        <th>REVELACION</th>
+        <th>INFELIZ</th>
+        <th>JUGADOR MAS ODIADO</th>
+        <th>NUNCA PUEDE</th>
+      </tr>
+      <% @unconfirmedVotes.each do |vote| %>
       <tr>
         <td><%= vote.email %></td>
         <td><%= vote.mmgvo %></td>
