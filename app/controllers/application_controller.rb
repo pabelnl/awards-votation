@@ -1,11 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   attr_accessor :extra_title
-  before_action :is_date_today
+  before_action :is_date_today, only: [:index, :vote, :confirm]
 
   def is_date_today
 
-    time = DateTime.new(2018,12,14,0,0,0)
+    time = DateTime.new(2018,12,15,0,0,0)
     errors = []
 
     if time.today?
