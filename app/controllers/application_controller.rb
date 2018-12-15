@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   attr_accessor :extra_title
-  before_action :votation_ended, only: [:index, :vote, :confirm]
+  before_action :votation_ended?, only: [:index, :vote, :confirm]
 
   def votation_ended?
 
